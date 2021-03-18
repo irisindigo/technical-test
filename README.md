@@ -1,1 +1,1 @@
-Who knows!!
+Technical test for Babel.
