@@ -7,21 +7,9 @@ import java.util.Set;
 
 public class Solution {
     public int[] solution(int K, int M, int[] A) {
-        Set<Integer> leaders = new HashSet<>();
-
         int[] frequencies = getFrequencies(M, A);
 
-        for (int i = 0; i < A.length; i++) {
-            if (i + K <= A.length) {
-                int[] modifiedFrequencies = getNewFrequencies(K, A, i, frequencies);
-
-                Optional<Integer> leader = findLeader(modifiedFrequencies, A.length);
-
-                leader.ifPresent(leaders::add);
-            } else {
-                break;
-            }
-        }
+        Set<Integer> leaders = getAllLeaders(K, A, frequencies);
 
         return leaders.stream()
                 .mapToInt(Integer::intValue)
@@ -37,6 +25,24 @@ public class Solution {
         }
 
         return frequencies;
+    }
+
+    private Set<Integer> getAllLeaders(int K, int[] A, int[] frequencies) {
+        Set<Integer> leaders = new HashSet<>();
+
+        for (int i = 0; i < A.length; i++) {
+            if (i + K > A.length) {
+                break;
+            }
+
+            int[] modifiedFrequencies = getNewFrequencies(K, A, i, frequencies);
+
+            Optional<Integer> leader = findLeader(modifiedFrequencies, A.length);
+
+            leader.ifPresent(leaders::add);
+        }
+
+        return leaders;
     }
 
     private int[] getNewFrequencies(int K, int[] A, int begin, int[] frequencies) {
