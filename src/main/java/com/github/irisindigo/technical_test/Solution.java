@@ -57,19 +57,19 @@ public class Solution {
     }
 
     private Optional<Integer> findLeader(int[] frequencies, int length) {
-        int maximum = 0;
-        int index = -1;
+        int leader = 0;
+
+        int halfLength = length / 2;
 
         for (int i = 0; i < frequencies.length; i++) {
             int frequency = frequencies[i];
 
-            if (maximum < frequency) {
-                maximum = frequency;
-                index = i;
+            if (frequency > halfLength) {
+                leader = i + 1;
+                break;
             }
         }
 
-        int halfLength = length / 2;
-        return maximum > halfLength ? Optional.of(index + 1) : Optional.empty();
+        return leader > 0 ? Optional.of(leader) : Optional.empty();
     }
 }

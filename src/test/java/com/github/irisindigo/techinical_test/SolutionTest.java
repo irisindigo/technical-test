@@ -74,4 +74,19 @@ class SolutionTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    void Test7() {
+        int[] data = new int[100_000];
+
+        for (int i = 0; i < data.length; i++) {
+            data[i] = i + 1;
+        }
+
+        int[] actual = SolutionTest.solution.solution(1, 100_000, data);
+
+        int[] expected = new int[]{};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
